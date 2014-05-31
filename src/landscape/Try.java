@@ -13,12 +13,12 @@ import javax.imageio.ImageIO;
 public class Try {
 
     public static void main(String[] args) throws IOException {
-        int height = 1024;
-        int width = 1024;
-        int seed = 33;
-        int R = 5;
-        Point a = new Point(0, 512);
-        Point b = new Point(width - 1, 512);
+        int height = 256;
+        int width = 2048;
+        int seed = 1997;
+        double R = 0.3;
+        Point a = new Point(0, height/2);
+        Point b = new Point(width - 1, height/2);
         ArrayList<Point> points = new ArrayList<>();
         points.add(a);
         points.add(b);
@@ -33,7 +33,9 @@ public class Try {
                 int x = (p1.x + p2.x) / 2;
                 int sign = r.nextBoolean() ? 1 : -1;
                 sign *= r.nextBoolean() ? 1 : 0;
-                int y = (p1.y + p2.y) / 2 + R * sign;
+                double L = p1.distance(p2);
+                L*=R;              
+                int y = (p1.y + p2.y) / 2 + r.nextInt((int)L+1) * sign;
                 Point p3 = new Point(x, y);
                 points.add(i, p3);
                 p1 = p2;
