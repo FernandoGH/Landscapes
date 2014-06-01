@@ -1,16 +1,50 @@
 package landscape;
 
 import filter.LandFilter;
+import java.util.Optional;
+import java.util.function.Function;
 
 public class Landscape {
 
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
     private int maxHeight;
     private int minHeight;
     private int maxMoist;
     private int minMoist;
-    private Tyle[][] tyles;
+    private final Tyle[][] tyles;
+
+    public Function<Integer, Integer> getDescrFunc() {
+        return (a) -> {
+            if (a == 0) {
+                return width;
+            }
+            if (a == 1) {
+                return height;
+            }
+            if (a == 2) {
+                return minHeight;
+            }
+            if (a == 3) {
+                return maxHeight;
+            }
+            if (a == 4) {
+                return minMoist;
+            }
+            if (a == 5) {
+                return maxMoist;
+            }
+            return null;
+        };
+    }
+
+    public Tyle getTyle(int a, int b) {
+        return tyles[a][b];
+    }
+
+    public void setTyle(int a, int b, Tyle t) {
+        tyles[a][b] = t;
+    }
 
     public Landscape(int wid, int heig) {
         tyles = new Tyle[wid][heig];
@@ -91,7 +125,7 @@ public class Landscape {
             for (int j = 0; j < getHeight(); j++) {
                 s += tyles[i][j].getHeight();
             }
-            s+="\n";
+            s += "\n";
         }
         return s;
     }
