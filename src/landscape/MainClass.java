@@ -9,17 +9,9 @@ public class MainClass {
 
     public static void main(String[] args) throws IOException {
 
-        Landscape land = new Landscape(512, 512);
+        Landscape land = new Landscape(512, 64);
 
-        Getter<Integer> getter = (a, b) -> {
-            if (a == 1 && b == 1) {
-                return 200;
-            }
-            if (a == -1 && b == -1) {
-                return -55;
-            }
-            return 0;
-        };
+        Getter<Integer> getter = RandomFill.constructGetter(land);
         Setter<Integer> setter = (a, b, h) -> land.getTyle(a, b).setHeight(h);
         RandomFill filter = new RandomFill(33, getter, setter);
         land.applyFilter(filter);
