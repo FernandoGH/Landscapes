@@ -14,11 +14,6 @@ public class Landscape {
     private int minMoist;
     private final Tyle[][] tyles;
 
-    /**
-     *
-     * @return 0=width, 1=height, 2=minHeight, 3=MaxHeight, 4=minMoist,
-     * 5=maxMoist.
-     */
     public Function<Integer, Integer> getDescrFunc() {
         return (a) -> {
             if (a == 0) {
@@ -112,9 +107,7 @@ public class Landscape {
     }
 
     public Landscape applyFilter(LandFilter filter) {
-        filter.transform();
-        this.refresh();
-        return this;
+        return filter.transform(this);
     }
 
     public int getMaxMoist() {
