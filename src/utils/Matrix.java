@@ -3,7 +3,7 @@ package utils;
 import java.util.ArrayList;
 
 public class Matrix<E> {
-    
+
     private int x = 0;
     private int y = 0;
     private E def = null;
@@ -69,6 +69,7 @@ public class Matrix<E> {
 
     boolean isSquare() {
         return x == y;
+
     }
 
     public int getX() {
