@@ -16,14 +16,14 @@ public class Try {
         int height = 256;
         int width = 2048;
         int seed = 1997;
-        double R = 0.3;
-        Point a = new Point(0, height/2);
-        Point b = new Point(width - 1, height/2);
+        double R = 0.25;
+        Point a = new Point(0, height / 2);
+        Point b = new Point(width - 1, height / 2);
         ArrayList<Point> points = new ArrayList<>();
         points.add(a);
         points.add(b);
         Random r = new Random(seed);
-        while (points.size() < width/2) {
+        while (points.size() < width) {
             int i = 0;
             Point p1 = points.get(0);
             int n = points.size();
@@ -34,8 +34,8 @@ public class Try {
                 int sign = r.nextBoolean() ? 1 : -1;
                 sign *= r.nextBoolean() ? 1 : 0;
                 double L = p1.distance(p2);
-                L*=R;              
-                int y = (p1.y + p2.y) / 2 + r.nextInt((int)L+1) * sign;
+                L *= R;
+                int y = (p1.y + p2.y) / 2 + r.nextInt((int) L + 1) * sign;
                 Point p3 = new Point(x, y);
                 points.add(i, p3);
                 p1 = p2;
