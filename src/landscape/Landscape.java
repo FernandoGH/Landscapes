@@ -131,6 +131,7 @@ public class Landscape {
         for (int i = 0; i < getWidth(); i++) {
             for (int j = 0; j < getHeight(); j++) {
                 s += tyles[i][j].getHeight();
+                s+= " ";
             }
             s += "\n";
         }

@@ -9,7 +9,7 @@ public class Matrix<E> {
     private E def = null;
     private final ArrayList<ArrayList<E>> elements = new ArrayList<>();
 
-    void add(int a, int b, E element) {
+    public void add(int a, int b, E element) {
         x++;
         y++;
         ArrayList<E> line = new ArrayList<>();
@@ -21,7 +21,7 @@ public class Matrix<E> {
         elements.add(a, line);
     }
 
-    void addLine(int a, int b, E element) {
+    public void addLine(int a, int b, E element) {
         y++;
         ArrayList<E> line = new ArrayList<>();
         for (int i = 0; i < getX(); i++) {
@@ -31,13 +31,13 @@ public class Matrix<E> {
         elements.add(a, line);
     }
 
-    void AddColumn(int a, int b, E element) {
+    public void addColumn(int a, int b, E element) {
         x++;
         elements.stream().forEach((l) -> l.add(b, null));
         elements.get(a).set(b, element);
     }
 
-    void add(E element) {
+    public void add(E element) {
         y++;
         ArrayList<E> line = new ArrayList<>();
         for (int i = 0; i < getY() - 1; i++) {
@@ -49,11 +49,11 @@ public class Matrix<E> {
         elements.get(getX() - 1).set(getY() - 1, element);
     }
 
-    void set(int a, int b, E element) {
+    public void set(int a, int b, E element) {
         elements.get(a).set(b, element);
     }
 
-    E get(int a, int b) {
+    public E get(int a, int b) {
         return elements.get(a).get(b);
     }
 
@@ -67,7 +67,7 @@ public class Matrix<E> {
         return s;
     }
 
-    boolean isSquare() {
+    public boolean isSquare() {
         return x == y;
 
     }

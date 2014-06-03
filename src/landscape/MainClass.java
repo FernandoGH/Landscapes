@@ -3,26 +3,24 @@ package landscape;
 import filter.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.function.Function;
 
 public class MainClass {
 
     public static void main(String[] args) throws IOException {
+        Landscape land = new Landscape(2048, 2048);
+        land.getTyle(0, 0).setHeight(5);
+        land.getTyle(3, 3).setHeight(33);
+        land.getTyle(0, 3).setHeight(50);
+        Getter<Integer> getter = MidpointFilter.constructGetter(land, (a, b) -> land.getTyle(a, b).getHeight());
 
-        Landscape land = new Landscape(512, 64);
-
-        Getter<Integer> getter = RandomFill.constructGetter(land);
-        Setter<Integer> setter = (a, b, h) -> land.getTyle(a, b).setHeight(h);
-        RandomFill filter = new RandomFill(33, getter, setter);
+        MidpointFilter filter = new NoisyMidpointFilter(33, getter, (a, b, c) -> land.getTyle(a, b).setHeight(c));
+        filter.setRoughness(0.5);
         land.applyFilter(filter);
-        Writer wr = new Writer(new File("try.bmp"));
-        getter = (a, b) -> land.getTyle(a, b).getHeight();
-        Function<Integer, Integer> data = (a) -> {
-            if (a < 4) {
-                return land.getDescrFunc().apply(a);
-            }
-            return null;
-        };
-        wr.RenderFunc(data, getter);
+        
+        System.out.println(land.getMaxHeight() + " " + land.getMinHeight());
+        System.out.println("Delta: " + (land.getMaxHeight()-land.getMinHeight()));
+        
+        Writer wr = new Writer(new File("Mid.bmp"));
+        wr.RenderFunc(land.getDescrFunc(), getter);
     }
 }
